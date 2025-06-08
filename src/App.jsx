@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Sidebar from "./components/SideBar";
 import Home from "./pages/Home";
+import Help from "./pages/Help";
 
 const Layout = () => {
   return (
@@ -12,7 +13,7 @@ const Layout = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          {/* Add more routes as needed */}
+          <Route path="/help" element={<Help />} />
         </Routes>
       </div>
     </div>
