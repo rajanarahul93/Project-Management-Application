@@ -11,20 +11,7 @@ import { Link } from "react-router-dom";
 
 
 export default function NavBar() {
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [showUserDropdown, setShowUserDropdown] = useState(false);
-
   // Toggle functions
-  const toggleNotifications = (e) => {
-    e.preventDefault();
-    setShowNotifications(!showNotifications);
-  };
-
-  const toggleUserDropdown = (e) => {
-    e.preventDefault();
-    setShowUserDropdown(!showUserDropdown);
-  };
-
 
   return (
     <nav className="navbar py-4 bg-light">
@@ -90,58 +77,10 @@ export default function NavBar() {
               className="nav-link dropdown-toggle pulse"
               href="#"
               role="button"
-              onClick={toggleNotifications}
             >
               <i className="icofont-alarm fs-5"></i>
               <span className="pulse-ring"></span>
             </a>
-
-            {showNotifications && (
-              <div
-                id="NotificationsDiv"
-                className="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-sm-end p-0 m-0 show"
-                style={{ minWidth: "380px" }}
-              >
-                <div className="card border-0 w-100">
-                  <div className="card-header border-0 p-3">
-                    <h5 className="mb-0 font-weight-light d-flex justify-content-between">
-                      <span>Notifications</span>
-                      <span className="badge text-white bg-primary">11</span>
-                    </h5>
-                  </div>
-                  <div className="tab-content card-body">
-                    <div className="tab-pane fade show active">
-                      <ul className="list-unstyled list mb-0">
-                        {/* Example notification items */}
-                        <li className="py-2 mb-1 border-bottom">
-                          <a href="#!" className="d-flex text-decoration-none">
-                            <img
-                              className="avatar rounded-circle"
-                              src="assets/images/xs/avatar1.jpg"
-                              alt="avatar"
-                            />
-                            <div className="flex-fill ms-2">
-                              <p className="d-flex justify-content-between mb-0">
-                                <span className="fw-bold">Dylan Hunter</span>{" "}
-                                <small>2MIN</small>
-                              </p>
-                              <span>
-                                Added 2021-02-19 my-Task ui/ux Design{" "}
-                                <span className="badge bg-success">Review</span>
-                              </span>
-                            </div>
-                          </a>
-                        </li>
-                        {/* Add other notifications similarly */}
-                      </ul>
-                    </div>
-                  </div>
-                  <a className="card-footer text-center border-top-0" href="#!">
-                    View all notifications
-                  </a>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* User Profile Dropdown */}
@@ -156,8 +95,6 @@ export default function NavBar() {
               className="nav-link dropdown-toggle pulse p-0"
               href="#"
               role="button"
-              onClick={toggleUserDropdown}
-              aria-expanded={showUserDropdown}
             >
               <img
                 className="avatar lg rounded-circle img-thumbnail"
@@ -166,53 +103,7 @@ export default function NavBar() {
               />
             </a>
 
-            {showUserDropdown && (
-              <div
-                className="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0 show"
-                style={{ minWidth: "280px" }}
-              >
-                <div className="card border-0 w-100">
-                  <div className="card-body pb-0">
-                    <div className="d-flex py-1">
-                      <img
-                        className="avatar rounded-circle"
-                        src="assets/images/profile_av.png"
-                        alt="profile"
-                      />
-                      <div className="flex-fill ms-3">
-                        <p className="mb-0">
-                          <span className="fw-bold">Dylan Hunter</span>
-                        </p>
-                        <small>Dylan.hunter@gmail.com</small>
-                      </div>
-                    </div>
 
-                    <hr className="dropdown-divider border-dark" />
-                  </div>
-                  <div className="list-group m-2">
-                    <a
-                      href="task.html"
-                      className="list-group-item list-group-item-action border-0"
-                    >
-                      <i className="icofont-tasks fs-5 me-3"></i>My Task
-                    </a>
-                    <a
-                      href="members.html"
-                      className="list-group-item list-group-item-action border-0"
-                    >
-                      <i className="icofont-ui-user-group fs-6 me-3"></i>Members
-                    </a>
-                    <a
-                      href="ui-elements/auth-signin.html"
-                      className="list-group-item list-group-item-action border-0"
-                    >
-                      <i className="icofont-logout fs-6 me-3"></i>Signout
-                    </a>
-                    <hr className="dropdown-divider border-dark" />
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
