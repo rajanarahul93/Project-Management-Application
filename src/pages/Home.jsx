@@ -1,7 +1,5 @@
 import React from 'react'
 import '../assets/css/my-task.style.min.css'
-
-
 import interviewLogo from  '../assets/images/interview.svg'
 import TopPerformers from '../components/TopPerformers';
 import UpcomingInterviews from '../components/UpcomingInterviews';

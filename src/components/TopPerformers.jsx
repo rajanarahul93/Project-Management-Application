@@ -4,7 +4,6 @@ import avatar2 from "../assets/images/lg/avatar2.jpg";
 import avatar9 from "../assets/images/lg/avatar9.jpg";
 import avatar12 from "../assets/images/lg/avatar12.jpg";
 import avatar8 from "../assets/images/lg/avatar8.jpg";
-import avatar7 from "../assets/images/lg/avatar7.jpg";
 import avatar3 from "../assets/images/lg/avatar3.jpg";
 import avatar5 from "../assets/images/lg/avatar5.jpg";
 
