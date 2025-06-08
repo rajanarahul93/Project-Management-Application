@@ -1,24 +1,43 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../assets/css/my-task.style.min.css";
 
 const Sidebar = () => {
-    const [isDashboardOpen, setDashboardOpen] = useState(true);
-    const [isProjectOpen, setProjectOpen] = useState(false);
-    const [isTicketOpen, setTicketOpen] = useState(false);
-    const [isClientOpen, setClientOpen] = useState(false);
-    const [isEmpOpen, setEmpOpen] = useState(false);
-    const [isAccountsOpen, setAccountsOpen] = useState(false);
-    const [isPayrollOpen, setPayrollOpen] = useState(false);
-    const [isAppOpen, setAppOpen] = useState(false);
-    const [isExtraOpen, setExtraOpen] = useState(false);
+  const location = useLocation();
 
+  const [isDashboardOpen, setDashboardOpen] = useState(false);
+  const [isProjectOpen, setProjectOpen] = useState(false);
+  const [isTicketOpen, setTicketOpen] = useState(false);
+  const [isClientOpen, setClientOpen] = useState(false);
+  const [isEmpOpen, setEmpOpen] = useState(false);
+  const [isAccountsOpen, setAccountsOpen] = useState(false);
+  const [isPayrollOpen, setPayrollOpen] = useState(false);
+  const [isAppOpen, setAppOpen] = useState(false);
+  const [isExtraOpen, setExtraOpen] = useState(false);
 
+  useEffect(() => {
+    const path = location.pathname;
+    setDashboardOpen(
+      path.includes("/index") || path.includes("/project-dashboard")
+    );
+    setProjectOpen(
+      path.includes("/projects") ||
+        path.includes("/task") ||
+        path.includes("/timesheet")
+    );
+    setTicketOpen(path.includes("/tickets"));
+    setClientOpen(path.includes("/clients"));
+    setEmpOpen(path.includes("/employees"));
+    setAccountsOpen(path.includes("/accounts"));
+    setPayrollOpen(path.includes("/payroll"));
+    setAppOpen(path.includes("/apps"));
+    setExtraOpen(path.includes("/extra"));
+  }, [location.pathname]);
 
   return (
     <div className="sidebar px-4 py-4 py-md-5 me-0">
       <div className="d-flex flex-column h-100">
-        <a href="index.html" className="mb-0 brand-icon">
+        <Link to="/index" className="mb-0 brand-icon">
           <span className="logo-icon">
             <svg
               width={35}
@@ -32,12 +51,12 @@ const Sidebar = () => {
                 d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
               />
               <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-              <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+              <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3z" />
             </svg>
           </span>
           <span className="logo-text">My-Task</span>
-        </a>
-        {/* Menu: main ul */}
+        </Link>
+
         <ul className="menu-list flex-grow-1 mt-3">
           <li className={isDashboardOpen ? "collapsed show" : "collapsed"}>
             <a
@@ -52,13 +71,11 @@ const Sidebar = () => {
               <span>Dashboard</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-
             <ul
               className={`sub-menu collapse ${isDashboardOpen ? "show" : ""}`}
-              id="dashboard-Components"
             >
               <li>
-                <Link className="ms-link active" to="/index">
+                <Link className="ms-link" to="/index">
                   <span>Hr Dashboard</span>
                 </Link>
               </li>
@@ -83,31 +100,21 @@ const Sidebar = () => {
               <span>Projects</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-
-            {/* Menu: Sub menu ul */}
-            <ul
-              className={`sub-menu collapse ${isProjectOpen ? "show" : ""}`}
-              id="project-Components"
-            >
+            <ul className={`sub-menu collapse ${isProjectOpen ? "show" : ""}`}>
               <li>
-                <a className="ms-link" href="projects.html">
+                <Link className="ms-link" to="/projects">
                   <span>Projects</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="ms-link" href="task.html">
+                <Link className="ms-link" to="/task">
                   <span>Tasks</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="ms-link" href="timesheet.html">
+                <Link className="ms-link" to="/timesheet">
                   <span>Timesheet</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="team-leader.html">
-                  <span>Leaders</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
@@ -125,21 +132,16 @@ const Sidebar = () => {
               <span>Tickets</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-
-            {/* Menu: Sub menu ul */}
-            <ul
-              className={`sub-menu collapse ${isTicketOpen ? "show" : ""}`}
-              id="tikit-Components"
-            >
+            <ul className={`sub-menu collapse ${isTicketOpen ? "show" : ""}`}>
               <li>
-                <a className="ms-link" href="tickets.html">
-                  <span>Tickets View</span>
-                </a>
+                <Link className="ms-link" to="/tickets">
+                  <span>All Tickets</span>
+                </Link>
               </li>
               <li>
-                <a className="ms-link" href="ticket-detail.html">
-                  <span>Ticket Detail</span>
-                </a>
+                <Link className="ms-link" to="/tickets/create">
+                  <span>Create Ticket</span>
+                </Link>
               </li>
             </ul>
           </li>
@@ -153,30 +155,24 @@ const Sidebar = () => {
               }}
               href="#"
             >
-              <i className="icofont-user-male" />
-              <span>Our Clients</span>
+              <i className="icofont-users-alt-2" />
+              <span>Clients</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-
-            {/* Menu: Sub menu ul */}
-            <ul
-              className={`sub-menu collapse ${isClientOpen ? "show" : ""}`}
-              id="client-Components"
-            >
+            <ul className={`sub-menu collapse ${isClientOpen ? "show" : ""}`}>
               <li>
-                <a className="ms-link" href="ourclients.html">
-                  <span>Clients</span>
-                </a>
+                <Link className="ms-link" to="/clients">
+                  <span>All Clients</span>
+                </Link>
               </li>
               <li>
-                <a className="ms-link" href="profile.html">
-                  <span>Client Profile</span>
-                </a>
+                <Link className="ms-link" to="/clients/create">
+                  <span>Create Client</span>
+                </Link>
               </li>
             </ul>
           </li>
 
-          {/* Employees */}
           <li className={isEmpOpen ? "collapsed show" : "collapsed"}>
             <a
               className={`m-link ${isEmpOpen ? "active" : ""}`}
@@ -186,53 +182,24 @@ const Sidebar = () => {
               }}
               href="#"
             >
-              <i className="icofont-users-alt-5" />
+              <i className="icofont-users-alt-3" />
               <span>Employees</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-            <ul
-              className={`sub-menu collapse ${isEmpOpen ? "show" : ""}`}
-              id="emp-Components"
-            >
+            <ul className={`sub-menu collapse ${isEmpOpen ? "show" : ""}`}>
               <li>
-                <a className="ms-link" href="members.html">
-                  <span>Members</span>
-                </a>
+                <Link className="ms-link" to="/employees">
+                  <span>All Employees</span>
+                </Link>
               </li>
               <li>
-                <a className="ms-link" href="employee-profile.html">
-                  <span>Members Profile</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="holidays.html">
-                  <span>Holidays</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="attendance-employees.html">
-                  <span>Attendance Employees</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="attendance.html">
-                  <span>Attendance</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="leave-request.html">
-                  <span>Leave Request</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="department.html">
-                  <span>Department</span>
-                </a>
+                <Link className="ms-link" to="/employees/create">
+                  <span>Create Employee</span>
+                </Link>
               </li>
             </ul>
           </li>
 
-          {/* Accounts */}
           <li className={isAccountsOpen ? "collapsed show" : "collapsed"}>
             <a
               className={`m-link ${isAccountsOpen ? "active" : ""}`}
@@ -242,33 +209,24 @@ const Sidebar = () => {
               }}
               href="#"
             >
-              <i className="icofont-ui-calculator" />
+              <i className="icofont-bank" />
               <span>Accounts</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-            <ul
-              className={`sub-menu collapse ${isAccountsOpen ? "show" : ""}`}
-              id="menu-Componentsone"
-            >
+            <ul className={`sub-menu collapse ${isAccountsOpen ? "show" : ""}`}>
               <li>
-                <a className="ms-link" href="invoices.html">
-                  <span>Invoices</span>
-                </a>
+                <Link className="ms-link" to="/accounts">
+                  <span>All Accounts</span>
+                </Link>
               </li>
               <li>
-                <a className="ms-link" href="payments.html">
-                  <span>Payments</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="expenses.html">
-                  <span>Expenses</span>
-                </a>
+                <Link className="ms-link" to="/accounts/create">
+                  <span>Create Account</span>
+                </Link>
               </li>
             </ul>
           </li>
 
-          {/* Payroll */}
           <li className={isPayrollOpen ? "collapsed show" : "collapsed"}>
             <a
               className={`m-link ${isPayrollOpen ? "active" : ""}`}
@@ -278,23 +236,24 @@ const Sidebar = () => {
               }}
               href="#"
             >
-              <i className="icofont-users-alt-5" />
+              <i className="icofont-pay" />
               <span>Payroll</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-            <ul
-              className={`sub-menu collapse ${isPayrollOpen ? "show" : ""}`}
-              id="payroll-Components"
-            >
+            <ul className={`sub-menu collapse ${isPayrollOpen ? "show" : ""}`}>
               <li>
-                <a className="ms-link" href="salaryslip.html">
-                  <span>Employee Salary</span>
-                </a>
+                <Link className="ms-link" to="/payroll">
+                  <span>All Payrolls</span>
+                </Link>
+              </li>
+              <li>
+                <Link className="ms-link" to="/payroll/create">
+                  <span>Create Payroll</span>
+                </Link>
               </li>
             </ul>
           </li>
 
-          {/* App */}
           <li className={isAppOpen ? "collapsed show" : "collapsed"}>
             <a
               className={`m-link ${isAppOpen ? "active" : ""}`}
@@ -304,28 +263,24 @@ const Sidebar = () => {
               }}
               href="#"
             >
-              <i className="icofont-contrast" />
-              <span>App</span>
+              <i className="icofont-layers" />
+              <span>Apps</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-            <ul
-              className={`sub-menu collapse ${isAppOpen ? "show" : ""}`}
-              id="app-Components"
-            >
+            <ul className={`sub-menu collapse ${isAppOpen ? "show" : ""}`}>
               <li>
-                <a className="ms-link" href="calendar.html">
-                  <span>Calander</span>
-                </a>
+                <Link className="ms-link" to="/apps">
+                  <span>All Apps</span>
+                </Link>
               </li>
               <li>
-                <a className="ms-link" href="chat.html">
-                  <span>Chat App</span>
-                </a>
+                <Link className="ms-link" to="/apps/create">
+                  <span>Create App</span>
+                </Link>
               </li>
             </ul>
           </li>
 
-          {/* Other Pages */}
           <li className={isExtraOpen ? "collapsed show" : "collapsed"}>
             <a
               className={`m-link ${isExtraOpen ? "active" : ""}`}
@@ -335,53 +290,20 @@ const Sidebar = () => {
               }}
               href="#"
             >
-              <i className="icofont-code-alt" />
-              <span>Other Pages</span>
+              <i className="icofont-extra" />
+              <span>Extras</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
-            <ul
-              className={`sub-menu collapse ${isExtraOpen ? "show" : ""}`}
-              id="extra-Components"
-            >
+            <ul className={`sub-menu collapse ${isExtraOpen ? "show" : ""}`}>
               <li>
-                <a className="ms-link" href="charts.html">
-                  <span>Apex Charts</span>
-                </a>
+                <Link className="ms-link" to="/extra">
+                  <span>All Extras</span>
+                </Link>
               </li>
               <li>
-                <a className="ms-link" href="forms.html">
-                  <span>Forms Example</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="table.html">
-                  <span>Table Example</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="review.html">
-                  <span>Reviews Page</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="icon.html">
-                  <span>Icons</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="contact.html">
-                  <span>Contact</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="widgets.html">
-                  <span>Widgets</span>
-                </a>
-              </li>
-              <li>
-                <a className="ms-link" href="todo-list.html">
-                  <span>Todo-List</span>
-                </a>
+                <Link className="ms-link" to="/extra/create">
+                  <span>Create Extra</span>
+                </Link>
               </li>
             </ul>
           </li>
