@@ -269,13 +269,13 @@ const Sidebar = () => {
             </a>
             <ul className={`sub-menu collapse ${isAppOpen ? "show" : ""}`}>
               <li>
-                <Link className="ms-link" to="/apps">
-                  <span>All Apps</span>
+                <Link className="ms-link" to="/calendar">
+                  <span>Calendar</span>
                 </Link>
               </li>
               <li>
-                <Link className="ms-link" to="/apps/create">
-                  <span>Create App</span>
+                <Link className="ms-link" to="/chat">
+                  <span>Chat App</span>
                 </Link>
               </li>
             </ul>
@@ -291,13 +291,13 @@ const Sidebar = () => {
               href="#"
             >
               <i className="icofont-extra" />
-              <span>Extras</span>
+              <span>Other Pages</span>
               <span className="arrow icofont-dotted-down ms-auto text-end fs-5" />
             </a>
             <ul className={`sub-menu collapse ${isExtraOpen ? "show" : ""}`}>
               <li>
                 <Link className="ms-link" to="/extra">
-                  <span>All Extras</span>
+                  <span>Apex Charts</span>
                 </Link>
               </li>
               <li>
